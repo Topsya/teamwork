@@ -1,5 +1,29 @@
 from task_11 import move_files
 from pathlib import Path
+import json
+
+def json_file(AddressBook,NoteBook):
+    with open('users_AddressBook.json', 'w') as fh:
+       json.dump(AddressBook,fh, indent=4, ensure_ascii=False)
+       print('AddressBook was creeate in json.')
+
+    with open('users_NoteBook.json', 'w') as fh:
+       json.dump(NoteBook,fh, indent=4, ensure_ascii=False)  
+       print('NoteBook was creeate in json.')
+
+def unpacked_AddressBook():
+    with open('users_AddressBook.json', 'r', encoding='utf-8') as read:
+       unpacked_users = json.load(read) 
+       print("AddressBook was unpacked.")
+       return unpacked_users
+    
+def unpacked_NoteBook():  
+    with open('users_NoteBook.json', 'r', encoding='utf-8') as read2:
+       unpacked_users2   = json.load(read2) 
+       print("NoteBook was unpacked.")
+       return unpacked_users2
+    
+
 
 def menu ():
     while  True:
