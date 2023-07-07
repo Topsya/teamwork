@@ -7,5 +7,3 @@ class Contacts:
             if search_term.lower() in contact.name.lower() or search_term.lower() in contact.phone.lower():
                 results.append(contact)
         return results
-    
-    #ssdsdsdsdsds
