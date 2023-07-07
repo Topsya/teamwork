@@ -1,7 +1,9 @@
+from task_11 import move_files
+from pathlib import Path
 
 def menu ():
     while  True:
-       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail :")
+       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail : ")
        if vodim == '1':
            AddressBook()
 
@@ -9,7 +11,7 @@ def menu ():
            NoteBook()
               
        elif vodim == '3':
-            path = Path(input('Введіть путь папки : '))
+            path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))
             move_files(path)
             
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
