@@ -27,7 +27,7 @@ def unpacked_NoteBook():
 
 def menu ():
     while  True:
-       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail : ")
+       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - open PhoneBook,NoteBook: ")
        if vodim == '1':
            AddressBook()
 
@@ -37,6 +37,12 @@ def menu ():
        elif vodim == '3':
             path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))
             move_files(path)
+        
+       elif vodim == '4':
+             json_file(AddressBook,NoteBook) 
+        
+       elif vodim == '5':
+             unpacked_AddressBook()
             
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
