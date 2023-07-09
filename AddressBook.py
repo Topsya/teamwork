@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timedelta
 
+
 class Contact:
     def __init__(self, name, address, phone, email, birthday):
         self.name = name
@@ -44,7 +45,7 @@ class Contact:
             raise ValueError("The @ symbol must be only one ")
         self.__email = email
 
-     def search_contacts(self, search_term):
+    def search_contacts(self, search_term):
         results = []
         for contact in self.contacts:
             if search_term.lower() in contact.name.lower() or search_term.lower() in contact.phone.lower():
@@ -68,9 +69,6 @@ class Contact:
                 return True
         return False
 
-    
-    
-    
 
 class AddressBook:
     def __init__(self):
@@ -99,6 +97,3 @@ class AddressBook:
                 upcoming_birthdays.append(contact)
 
         return upcoming_birthdays
-
-
-
