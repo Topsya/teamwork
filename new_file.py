@@ -2,6 +2,10 @@ from task_11 import move_files
 import json
 from pogoda import pogoda_in_city
 from pathlib import Path
+import AddressBook
+import NoteBook
+
+
 
 def json_file(AddressBook,NoteBook):
     with open('users_AddressBook.json', 'w') as fh:
