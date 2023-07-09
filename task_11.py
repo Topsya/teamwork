@@ -2,7 +2,7 @@ from pathlib import Path
 import shutil
 import os
 
-path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))
+
 
 def move_files(path):
 
@@ -71,7 +71,7 @@ def move_files(path):
    list_foto = os.listdir(os.path.join(path,'imeges'))
    list_doc  = os.listdir(os.path.join(path,'documents'))
    list_archiv =os.listdir(os.path.join(path,'archives'))
-   list_neizvestnie = path.glob('*.*')
+   # list_neizvestnie = path.glob('*.*')
 
    print ({  
               'list_music':  list_music,
@@ -79,14 +79,14 @@ def move_files(path):
               'list_foto': list_foto,
               'list_doc': list_doc,
               'list_archiv': list_archiv,
-     #         'list_vse_razresh': list_vse_razresh,
-              'list_neizvestnie': list_neizvestnie,
+            # 'list_vse_razresh': list_vse_razresh,
+            # 'list_neizvestnie': list_neizvestnie,
             })
      
 # Список файлів в кожній категорії (музика, відео, фото та ін.)
 # Перелік усіх відомих скрипту розширень, які зустрічаються в цільовій папці.
 # Перелік всіх розширень, які скрипту невідомі.
 
-
-move_files (path)
-
+if __name__ == '__main__': 
+      path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))
+      move_files (path)

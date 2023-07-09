@@ -6,7 +6,7 @@ now = datetime.now()
 
 class Notatki:
     def __init__(self, zapis, now):
-        self.zapis = zapis + now
+        self.zapis = zapis + now.strftime(" %Y-%m-%d %H:%M:%S")
 
 
 class NoteBook:
@@ -16,6 +16,12 @@ class NoteBook:
     def add_notatki(self, notatki):
         self.notatki.append(notatki)
 
+    def search_notatki(self, keyword):
+            found_notatki = []
+            for notatka in self.notatki:
+                if keyword in notatka.zapis:
+                    found_notatki.append(notatka)
+            return found_notatki
 
     def edit_notatki(self, index, notatki):
         if index >= 0 and index < len(self.notatki):
@@ -31,4 +37,16 @@ class NoteBook:
 
 
 if __name__ == "__main__":
+    notebook = NoteBook()
+
     zapis = input('add new notes: ')
+    notebook.add_notatki(Notatki(zapis, now))
+
+    search_keyword = input('enter search keyword: ')
+    found_notatki = notebook.search_notatki(search_keyword)
+    if found_notatki:
+        print("Found notatki:")
+        for notatka in found_notatki:
+            print(notatka.zapis)
+    else:
+        print("No notatki found.")

@@ -1,6 +1,7 @@
 from task_11 import move_files
-from pathlib import Path
 import json
+from pogoda import pogoda_in_city
+from pathlib import Path
 
 def json_file(AddressBook,NoteBook):
     with open('users_AddressBook.json', 'w') as fh:
@@ -22,27 +23,34 @@ def unpacked_NoteBook():
        unpacked_users2   = json.load(read2) 
        print("NoteBook was unpacked.")
        return unpacked_users2
-    
 
 
 def menu ():
     while  True:
-       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - open PhoneBook,NoteBook: ")
+       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - load PhoneBook,NoteBook; 6 - Wether : ")
        if vodim == '1':
            AddressBook()
 
-       elif  vodim == '2':
+       if  vodim == '2':
            NoteBook()
               
-       elif vodim == '3':
-            path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))
-            move_files(path)
+       if vodim == '3':
+            path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))       
+            try:
+                move_files (path)
+            except :
+                print ('The path to the folder was not found("путь к папке не найден") ')
+                return
+
         
        elif vodim == '4':
              json_file(AddressBook,NoteBook) 
         
        elif vodim == '5':
              unpacked_AddressBook()
+
+       elif vodim == '6':
+            pogoda_in_city()
             
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
