@@ -1,5 +1,5 @@
 # teamwork
-Меню для проекту
+Меню для проекту "personal assistant Tech_Titans"
 
 1. Книга контактів 
 2. Нотатки
