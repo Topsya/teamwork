@@ -5,13 +5,13 @@ class Contact:
     def __init__(self, name, address, phone, email, birthday):
         self.name = name
         self.address = address
-        self._phone = phone
-        self._email = email
+        self.__phone = phone
+        self.__email = email
         self.birthday = birthday
 
     @property
     def phone(self):
-        return self._phone
+        return self.__phone
 
     @phone.setter
     def phone(self, phone):
@@ -21,11 +21,11 @@ class Contact:
             raise ValueError("Phone number must contain only digits")
         if len(phone) != 10:
             raise ValueError("Phone number must be 10 digits long")
-        self._phone = phone
+        self.__phone = phone
 
     @property
     def email(self):
-        return self._email
+        return self.__email
 
     @email.setter
     def email(self, email):
@@ -42,7 +42,7 @@ class Contact:
                 "The @ symbol cannot be the first or last character")
         if email.count('@') > 1:
             raise ValueError("The @ symbol must be only one ")
-        self._email = email
+        self.__email = email
 
 class AddressBook:
     def __init__(self):
