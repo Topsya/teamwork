@@ -35,12 +35,13 @@ def menu ():
            NoteBook()
               
        if vodim == '3':
-            path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))       
-            try:
-                move_files (path)
-            except :
-                print ('The path to the folder was not found("путь к папке не найден") ')
-                return
+            while True:
+                path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))       
+                try:
+                    move_files (path)
+                except :
+                    print ('The path to the folder was not found("путь к папке не найден") ')
+                    break
 
         
        elif vodim == '4':
