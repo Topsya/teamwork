@@ -33,9 +33,11 @@ def menu ():
     while  True:
        vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - load PhoneBook,NoteBook; 6 - Wether : ")
        if vodim == '1':
+           
            AddressBook()
 
        if  vodim == '2':
+           
            NoteBook()
               
        if vodim == '3':
@@ -53,6 +55,7 @@ def menu ():
         
        elif vodim == '5':
              unpacked_AddressBook()
+             unpacked_NoteBook()
 
        elif vodim == '6':
             pogoda_in_city()
