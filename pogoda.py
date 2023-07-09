@@ -1,5 +1,5 @@
 from pyowm import OWM
-
+ # ustanovka pip install pyowm
 def pogoda_in_city():
         
     city = input('enter the name of the city, where you want to know the weather : ')
