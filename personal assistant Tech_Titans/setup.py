@@ -8,6 +8,7 @@ setup(
     author_email= "topsya1986@gmail.com,  ned.warov@gmail.com,  kolesnyk.elyzaveta24.1201@gmail.com,  oleg.dovgyy@gmail.com",
     packages= find_namespace_packages(),
     include_package_data=True,
+    install_requires=['pyowm'],
     entry_points={
           "console_scripts": ["clean-folder=Clean_folders.start:clean_folder"]
           }
