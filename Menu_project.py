@@ -4,8 +4,7 @@ from pogoda import pogoda_in_city
 from pathlib import Path
 import AddressBook
 import NoteBook
-
-
+from mygame import main
 
 def json_file(AddressBook,NoteBook):
     with open('users_AddressBook.json', 'w') as fh:
@@ -59,7 +58,9 @@ def menu ():
 
        elif vodim == '6':
             pogoda_in_city()
-            
+
+       elif vodim == '7':
+            main()
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
             break
