@@ -53,7 +53,7 @@ def menu ():
 
         
        elif vodim == '4':
-             json_file(AddressBook,NoteBook) 
+             json_file(AddressBookBot.address_book,NoteBook) 
         
        elif vodim == '5':
              unpacked_AddressBook()
@@ -62,8 +62,9 @@ def menu ():
        elif vodim == '6':
             pogoda_in_city()
 
-    #    elif vodim == '7':
-    #           mygame.main()
+       elif vodim == '7':
+              import mygame.main
+              mygame.main
 
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
