@@ -75,7 +75,7 @@ class NoteBook:
 def add_note():
     name = input("Enter the note name: ")
     content = input("Enter the note content: ")
-    tags = input("Enter tags for the note (comma-separated, press Enter to skip): ")
+    tags = input("Enter tags for the note: ")
     if tags:
         tags = [tag.strip() for tag in tags.split(",")]
     note = Note(name, content, tags)
