@@ -1,5 +1,6 @@
 # teamwork
 Меню для проекту "personal assistant Tech_Titans"
+встановити командою assistant
 
 1. Книга контактів 
      Для старту просе вести "hello" 
