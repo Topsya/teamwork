@@ -21,7 +21,7 @@ font = pygame.font.SysFont('Verdana', 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-IMGS_PATH = 'goose'
+IMGS_PATH = r'mygame\goose'
 
 # ball = pygame.Surface((20, 20))
 # ball.fill(PURPLE)
@@ -34,7 +34,7 @@ def create_bonus():
 
     bonus = pygame.Surface((20, 20))
     #bonus.fill(GREEN)
-    bonus = pygame.image.load('bonus.png').convert_alpha()
+    bonus = pygame.image.load(r'mygame/bonus.png').convert_alpha()
     bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
     bonus_speed = random.randint(3, 7)
     return [bonus, bonus_rect, bonus_speed]
@@ -46,12 +46,12 @@ def create_enemy():
 
     enemy = pygame.Surface((20, 20))
     #enemy.fill(RED)
-    enemy = pygame.image.load('enemy.png').convert_alpha()
+    enemy = pygame.image.load(r'mygame\enemy.png').convert_alpha()
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(4, 7)
     return [enemy, enemy_rect, enemy_speed]
 
-bg = pygame.transform.scale(pygame.image.load('background.png').convert(), screen )
+bg = pygame.transform.scale(pygame.image.load(r'mygame\background.png').convert(), screen )
 bgX = 0
 bgX2 = bg.get_width()
 bg_speed = 3
@@ -167,3 +167,7 @@ while is_working:
 
      # main_surface.fill((155, 155, 155))
     pygame.display.flip()
+    
+    
+if __name__ == '__main__': 
+      pygame.init() 

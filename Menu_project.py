@@ -2,9 +2,12 @@ from task_11 import move_files
 import json
 from pogoda import pogoda_in_city
 from pathlib import Path
-import AddressBook
+import AddressBookBot
 import NoteBook
-from mygame import main
+
+# import mygame.main
+
+# from mygame import main
 
 def json_file(AddressBook,NoteBook):
     with open('users_AddressBook.json', 'w') as fh:
@@ -33,7 +36,7 @@ def menu ():
        vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - load PhoneBook,NoteBook; 6 - Wether : ")
        if vodim == '1':
            
-           AddressBook()
+           AddressBookBot()
 
        if  vodim == '2':
            
@@ -59,8 +62,9 @@ def menu ():
        elif vodim == '6':
             pogoda_in_city()
 
-       elif vodim == '7':
-            main()
+    #    elif vodim == '7':
+    #           mygame.main()
+
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
             break
