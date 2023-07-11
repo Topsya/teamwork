@@ -138,6 +138,11 @@ class AddressBook:
             elif command == "search":
                 search_term = input("Enter the search term: ")
                 response = self.handle_search(search_term)
+            
+            elif command == "upcoming birthdays":
+                days = int(input("Enter the number of days to check: "))
+                response = self.get_upcoming_birthdays(days)
+            
             elif command in ["good bye", "close", "exit"]:
                 response = "Good bye!"
                 break
