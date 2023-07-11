@@ -162,7 +162,7 @@ def main():
         print('3. Delete a note')
         print('4. Search notes')
         print('5. Search notes by tag')
-        print('6. Exit')
+        print(' "6" or "good bye", "close", "exit" for close NoteBook')
 
         choice = input('Enter the option number: ')
 
@@ -177,6 +177,8 @@ def main():
         elif choice == '5':
             search_notes_by_tag()
         elif choice == '6':
+            break
+        elif choice in ["good bye", "close", "exit"]:
             break
         else:
             print('Invalid input. Please try again.')
