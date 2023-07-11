@@ -2,7 +2,7 @@ from task_11 import move_files
 import json
 from pogoda import pogoda_in_city
 from pathlib import Path
-import AddressBookBot
+# import AddressBookBot
 from AddressBookBot import AddressBook
 # import AddressBook
 import NoteBook
