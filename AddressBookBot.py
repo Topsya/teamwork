@@ -113,6 +113,16 @@ class AddressBook:
         else:
             return "No contacts found."
 
+    def save_contacts(self, filename):
+        with open(filename, 'w') as file:
+            json.dump([contact.__dict__ for contact in self.contacts], file)
+
+    def load_contacts(self, filename):
+        with open(filename, 'r') as file:
+            contacts_data = json.load(file)
+            self.contacts = [Contact(**data) for data in contacts_data]
+
+
     def main(self):
         while True:
             command = input("Enter a command: ").lower()
@@ -138,7 +148,18 @@ class AddressBook:
             elif command == "search":
                 search_term = input("Enter the search term: ")
                 response = self.handle_search(search_term)
+
+            elif command == "save":
+                filename = input("Enter the filename to save contacts: ")
+                self.save_contacts(filename)
+                response = "Contacts saved successfully."
+            elif command == "load":
+                filename = input("Enter the filename to load contacts: ")
+                self.load_contacts(filename)
+                response = "Contacts loaded successfully."
+
             
+
             elif command == "upcoming birthdays":
                 days = int(input("Enter the number of days to check: "))
                 response = self.get_upcoming_birthdays(days)
