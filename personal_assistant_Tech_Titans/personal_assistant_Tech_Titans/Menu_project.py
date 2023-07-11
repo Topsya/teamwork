@@ -4,10 +4,9 @@ from pogoda import pogoda_in_city
 from pathlib import Path
 import AddressBookBot
 import NoteBook
+import NoteBookBot
+import time
 
-# import mygame.main
-
-# from mygame import main
 
 def json_file(AddressBook,NoteBook):
     with open('users_AddressBook.json', 'w') as fh:
@@ -33,23 +32,28 @@ def unpacked_NoteBook():
 
 def menu ():
     while  True:
-       vodim = input("enter command:  1 - PhoneBook; 2 - NoteBook; 3 - SortFail; 4 - save PhoneBook,NoteBook; 5 - load PhoneBook,NoteBook; 6 - Wether : ")
+       print(' 1 - PhoneBook;\n 2 - NoteBook;\n 3 - SortFail;\n 4 - save PhoneBook,NoteBook;\n 5 - load PhoneBook,NoteBook;\n 6 - Wether;\n 7 - fun game')
+       vodim = input("enter command: ")
        if vodim == '1':
            
            AddressBookBot()
 
        if  vodim == '2':
            
-           NoteBook()
+           NoteBookBot()
               
        if vodim == '3':
             while True:
-                path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))       
-                try:
-                    move_files (path)
-                except :
-                    print ('The path to the folder was not found("путь к папке не найден") ')
-                    break
+                path = Path(input('Enter the path of the folder where you want to sort files\n("Введіть путь папки де потрібно зробити сортування файлів"): '))
+                if len(str(path)) <= 1:
+                    print ("--You didn't lead anything, try another path\n   ('ви нічого не вели, спробуй другой шляx')\n--------------------------------------")
+                    break 
+                else :      
+                    try:
+                        move_files (path)
+                    except :
+                        print ('The path to the folder was not found\n ("Путь к папке не знайден")\n ------------------------------------------------------------------ ')
+                        break
 
         
        elif vodim == '4':
@@ -63,6 +67,8 @@ def menu ():
             pogoda_in_city()
 
        elif vodim == '7':
+              print('the game will start in 3 seconds')
+              time.sleep(3)
               import mygame.main
               mygame.main
 
