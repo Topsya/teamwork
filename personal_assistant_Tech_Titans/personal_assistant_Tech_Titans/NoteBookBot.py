@@ -61,12 +61,12 @@ class NoteBook:
         return matching_notes
 
     def save_notes(self, filename):
-        with open(filename, "wb") as file:
+        with open(filename, "wb", indent=4, ensure_ascii=False) as file:
             pickle.dump(self.notes, file)
 
     def load_notes(self, filename):
         try:
-            with open(filename, "rb") as file:
+            with open(filename, "rb", encoding='utf-8') as file:
                 self.notes = pickle.load(file)
         except FileNotFoundError:
             self.notes = []
@@ -149,6 +149,9 @@ def search_notes_by_tag():
 def load_notes():
     notebook.load_notes("notes.pkl")
 
+def save_notes():
+    notebook.save_notes("notes.pkl")
+
 
 def main():
     global notebook
@@ -176,9 +179,13 @@ def main():
             search_notes()
         elif choice == '5':
             search_notes_by_tag()
+        elif choice == '7':
+           save_notes()
         elif choice == '6':
+            save_notes()
             break
         elif choice in ["good bye", "close", "exit"]:
+            save_notes()
             break
         else:
             print('Invalid input. Please try again.')

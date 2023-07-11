@@ -166,6 +166,7 @@ def main():
         print('4. Search notes')
         print('5. Search notes by tag')
         print(' "6" or "good bye", "close", "exit" for close NoteBook')
+        print('7. Save notes')
 
         choice = input('Enter the option number: ')
 
