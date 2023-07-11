@@ -2,12 +2,20 @@ from task_11 import move_files
 import json
 from pogoda import pogoda_in_city
 from pathlib import Path
-# import AddressBookBot
+import random
+from os import listdir
+import pygame
+from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
+from datetime import datetime, timedelta
 from AddressBookBot import AddressBook
-# import AddressBook
+import pickle
+from pyowm import OWM
 import NoteBook
 import NoteBookBot
 import time
+import shutil
+
+
 
 
 def json_file(AddressBook,NoteBook):
