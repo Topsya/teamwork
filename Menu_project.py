@@ -39,13 +39,13 @@ def menu ():
        vodim = input("enter command: ")
        
        if vodim == '1':
-            AddressBook.main()
+            AddressBookBot()
               
         
 
        if  vodim == '2':
            
-           main
+           NoteBookBot()
 
               
        if vodim == '3':
