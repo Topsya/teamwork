@@ -3,8 +3,11 @@ import json
 from pogoda import pogoda_in_city
 from pathlib import Path
 import AddressBookBot
+from AddressBookBot import AddressBook
+# import AddressBook
 import NoteBook
 import NoteBookBot
+from NoteBookBot import main
 import time
 
 
@@ -34,13 +37,16 @@ def menu ():
     while  True:
        print(' 1 - PhoneBook;\n 2 - NoteBook;\n 3 - SortFail;\n 4 - save PhoneBook,NoteBook;\n 5 - load PhoneBook,NoteBook;\n 6 - Wether;\n 7 - fun game')
        vodim = input("enter command: ")
+       
        if vodim == '1':
-           
-           AddressBookBot()
+            AddressBook.main()
+              
+        
 
        if  vodim == '2':
            
-           NoteBookBot()
+           main
+
               
        if vodim == '3':
             while True:
@@ -57,7 +63,7 @@ def menu ():
 
         
        elif vodim == '4':
-             json_file(AddressBookBot.address_book,NoteBook) 
+             json_file( AddressBook ,NoteBook) 
         
        elif vodim == '5':
              unpacked_AddressBook()

@@ -30,7 +30,8 @@ class Contact:
 
     @email.setter
     def email(self, email):
-        exceptions = [";", ",", "[", "]", "*", "(", ")", ">", "<", ":"]
+        exceptions = [";", ',', "[", "]", "*",
+                      "(", ")", ">", "<", ":"]
         for i in exceptions:
             if email.find(i) != -1:
                 raise ValueError("Mail contains prohibited characters")
@@ -38,9 +39,10 @@ class Contact:
         if "@" not in email and "." not in email:
             raise ValueError("Email must contain the @ symbol")
         if email[0] == "@" or email[-1] == "@":
-            raise ValueError("The @ symbol cannot be the first or last character")
+            raise ValueError(
+                "The @ symbol cannot be the first or last character")
         if email.count('@') > 1:
-            raise ValueError("The @ symbol must be only one")
+            raise ValueError("The @ symbol must be only one ")
         self.__email = email
 
     def search_contacts(self, search_term):
@@ -66,8 +68,6 @@ class Contact:
                 self.contacts.remove(contact)
                 return True
         return False
-
-
 class AddressBook:
     def __init__(self):
         self.contacts = []
@@ -113,19 +113,6 @@ class AddressBook:
         else:
             return "No contacts found."
 
-    def get_upcoming_birthdays(self, days):
-        today = datetime.now().date()
-        upcoming_birthdays = []
-
-        for contact in self.contacts:
-            birthday = datetime.strptime(contact.birthday, "%Y-%m-%d").date()
-            upcoming_birthday = birthday.replace(year=today.year)
-
-            if today <= upcoming_birthday <= today + timedelta(days=days):
-                upcoming_birthdays.append(contact)
-
-        return upcoming_birthdays
-
     def main(self):
         while True:
             command = input("Enter a command: ").lower()
@@ -151,9 +138,6 @@ class AddressBook:
             elif command == "search":
                 search_term = input("Enter the search term: ")
                 response = self.handle_search(search_term)
-            elif command == "upcoming birthdays":
-                days = int(input("Enter the number of days to check: "))
-                response = self.get_upcoming_birthdays(days)
             elif command in ["good bye", "close", "exit"]:
                 response = "Good bye!"
                 break
