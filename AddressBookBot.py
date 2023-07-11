@@ -113,18 +113,14 @@ class AddressBook:
         else:
             return "No contacts found."
 
-    def get_upcoming_birthdays(self, days):
-        today = datetime.now().date()
-        upcoming_birthdays = []
+    def save_contacts(self, filename):
+        with open(filename, 'w') as file:
+            json.dump([contact.__dict__ for contact in self.contacts], file)
 
-        for contact in self.contacts:
-            birthday = datetime.strptime(contact.birthday, "%Y-%m-%d").date()
-            upcoming_birthday = birthday.replace(year=today.year)
-
-            if today <= upcoming_birthday <= today + timedelta(days=days):
-                upcoming_birthdays.append(contact)
-
-        return upcoming_birthdays
+    def load_contacts(self, filename):
+        with open(filename, 'r') as file:
+            contacts_data = json.load(file)
+            self.contacts = [Contact(**data) for data in contacts_data]
 
     def main(self):
         while True:
@@ -151,6 +147,14 @@ class AddressBook:
             elif command == "search":
                 search_term = input("Enter the search term: ")
                 response = self.handle_search(search_term)
+            elif command == "save":
+                filename = input("Enter the filename to save contacts: ")
+                self.save_contacts(filename)
+                response = "Contacts saved successfully."
+            elif command == "load":
+                filename = input("Enter the filename to load contacts: ")
+                self.load_contacts(filename)
+                response = "Contacts loaded successfully."
             elif command == "upcoming birthdays":
                 days = int(input("Enter the number of days to check: "))
                 response = self.get_upcoming_birthdays(days)
