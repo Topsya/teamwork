@@ -2,9 +2,20 @@ from task_11 import move_files
 import json
 from pogoda import pogoda_in_city
 from pathlib import Path
-import AddressBookBot
+import random
+from os import listdir
+import pygame
+from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
+from datetime import datetime, timedelta
+from AddressBookBot import AddressBook
+import pickle
+from pyowm import OWM
 import NoteBook
 import NoteBookBot
+import time
+import shutil
+
+
 
 
 def json_file(AddressBook,NoteBook):
@@ -33,26 +44,34 @@ def menu ():
     while  True:
        print(' 1 - PhoneBook;\n 2 - NoteBook;\n 3 - SortFail;\n 4 - save PhoneBook,NoteBook;\n 5 - load PhoneBook,NoteBook;\n 6 - Wether;\n 7 - fun game')
        vodim = input("enter command: ")
+       
        if vodim == '1':
-           
-           AddressBookBot()
+            print ('start work in AddressBook: ')
+            AddressBook.main('hello')
+              
+        
 
        if  vodim == '2':
-           
-           NoteBookBot()
+           print ('start work in NoteBook:')
+           NoteBookBot.main()
+
               
        if vodim == '3':
             while True:
-                path = Path(input('Введіть путь папки де потрібно зробити сортування файлів: '))       
-                try:
-                    move_files (path)
-                except :
-                    print ('The path to the folder was not found("путь к папке не найден") ')
-                    break
+                path = Path(input('Enter the path of the folder where you want to sort files\n("Введіть путь папки де потрібно зробити сортування файлів"): '))
+                if len(str(path)) <= 1:
+                    print ("--You didn't lead anything, try another path\n   ('ви нічого не вели, спробуй другой шляx')\n--------------------------------------")
+                    break 
+                else :      
+                    try:
+                        move_files (path)
+                    except :
+                        print ('The path to the folder was not found\n ("Путь к папке не знайден")\n ------------------------------------------------------------------ ')
+                        break
 
         
        elif vodim == '4':
-             json_file(AddressBookBot.address_book,NoteBook) 
+             json_file( AddressBook ,NoteBook) 
         
        elif vodim == '5':
              unpacked_AddressBook()
@@ -62,6 +81,8 @@ def menu ():
             pogoda_in_city()
 
        elif vodim == '7':
+              print('the game will start in 3 seconds')
+              time.sleep(3)
               import mygame.main
               mygame.main
 
