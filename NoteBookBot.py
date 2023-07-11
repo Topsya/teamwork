@@ -149,6 +149,9 @@ def search_notes_by_tag():
 def load_notes():
     notebook.load_notes("notes.pkl")
 
+def save_notes():
+    notebook.save_notes("notes.pkl")
+
 
 def main():
     global notebook
@@ -176,9 +179,13 @@ def main():
             search_notes()
         elif choice == '5':
             search_notes_by_tag()
+        elif choice == '7':
+           save_notes()
         elif choice == '6':
+            save_notes()
             break
         elif choice in ["good bye", "close", "exit"]:
+            save_notes()
             break
         else:
             print('Invalid input. Please try again.')
