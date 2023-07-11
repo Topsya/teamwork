@@ -7,7 +7,6 @@ from AddressBookBot import AddressBook
 # import AddressBook
 import NoteBook
 import NoteBookBot
-from NoteBookBot import main
 import time
 
 
@@ -39,13 +38,14 @@ def menu ():
        vodim = input("enter command: ")
        
        if vodim == '1':
-            AddressBookBot()
+            print ('start work in AddressBook: ')
+            AddressBook.main('hello')
               
         
 
        if  vodim == '2':
-           
-           NoteBookBot()
+           print ('start work in NoteBook:')
+           NoteBookBot.main()
 
               
        if vodim == '3':
