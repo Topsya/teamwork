@@ -152,7 +152,7 @@ class AddressBook:
 
     def save_contacts2(self, filename):
         with open(filename, "w") as file:
-            json.dump([contact.to_dict() for contact in self.contacts], file)
+            json.dump([contact.to_dict() for contact in self.contacts], file, indent=5, ensure_ascii=False)
 
     def load_contacts2(self, filename):
         try:
