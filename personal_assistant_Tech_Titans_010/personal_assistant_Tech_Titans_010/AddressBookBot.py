@@ -10,6 +10,15 @@ class Contact:
         self.__email = email
         self.birthday = birthday
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "address": self.address,
+            "phone": self.phone,
+            "email": self.email,
+            "birthday": self.birthday
+        }    
+
     @property
     def phone(self):
         return self.__phone
@@ -147,7 +156,7 @@ class AddressBook:
 
     def load_contacts2(self, filename):
         try:
-            with open(filename, "r") as file:
+            with open(filename, "r" ) as file:
                 contacts_data = json.load(file)
                 self.contacts = [Contact(**data) for data in contacts_data]
         except FileNotFoundError:
@@ -174,18 +183,22 @@ def handle_change():
     AddressBook.handle_change(name, address, phone, email, birthday)
     AddressBook.save_contacts("usersbook.pkl")
     AddressBook.save_contacts2("usersbook.json")
-
     print("Contact change successfully.") 
+
 
 def handle_search():
     search_term = input("Enter the search term: ")
-    AddressBook.handle_delete(search_term)
-    print(f'{AddressBook.handle_search(search_term)}')
+    results = AddressBook.handle_search(search_term)
+    if isinstance(results, list):
+        for contact in results:
+            print(contact.to_dict())
+    else:
+        print(results)
 
 def handle_delete():
     name = input("Enter the name of the contact to delete: ")
-    if Contact.name == name:
-        AddressBook.handle_delete(name)
+    result = AddressBook.handle_delete(name)
+    if result:    
         AddressBook.save_contacts("usersbook.pkl")
         AddressBook.save_contacts2("usersbook.json")
         print("Contact delete successfully.") 
@@ -195,7 +208,9 @@ def handle_delete():
 
 def get_upcoming_birthdays(days):
     days = int(input("Enter the number of days to check: "))
-    print (f'{AddressBook.get_upcoming_birthdays(days)}')
+    results = AddressBook.get_upcoming_birthdays(days)
+    for contact in results:
+        print(contact.to_dict())
 
 def save_contacts():
     AddressBook.save_contacts("usersbook.pkl")
@@ -205,12 +220,12 @@ def load_contacts():
 
 def save_contacts2():
     AddressBook.save_contacts2("usersbook.json")
-    print("Contacts saved successfully.")
+    print("Contacts saved successfully json.")
 
 
 def load_contacts2():
     AddressBook.load_contacts2("usersbook.json")
-    print("Contacts loaded successfully.")
+    print("Contacts loaded successfully json.")
 
 
 
@@ -218,7 +233,7 @@ def main():
             
         global AddressBook
         AddressBook = AddressBook() 
-        load_contacts()
+        AddressBook.load_contacts2("usersbook.json")
             
         while True:
             print('-------Menu AddressBook:----')

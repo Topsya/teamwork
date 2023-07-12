@@ -4,11 +4,14 @@ import json
 
 
 class Note:
-    def __init__(self, name, content, tags=None):
+    def __init__(self, name, content, tags=None, timestamp=None):
         self.name = name
         self.content = content
         self.tags = tags if tags else []
-        self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        if timestamp is not None:
+            self.timestamp = timestamp
+        else:
+            self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     def set_name(self, new_name):
         self.name = new_name
@@ -26,6 +29,16 @@ class Note:
         if tag in self.tags:
             matching_notes.append(self)
         return matching_notes
+    
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "content": self.content,
+            "tags": self.tags,
+            "timestamp": self.timestamp
+        }
+
+
 
 
 class NoteBook:
@@ -97,7 +110,7 @@ def add_note():
     note = Note(name, content, tags)
     notebook.add_note(note)
     notebook.save_notes("usernotes.pkl")
-    notebook.save_notes("usernotes.json")
+    notebook.save_notes2("usernotes.json")
     print("Note added successfully.")
     print("Timestamp:", note.timestamp)
 
@@ -119,7 +132,7 @@ def edit_note():
         note.tags = tags
         notebook.edit_note(index, note)
         notebook.save_notes("usernotes.pkl")
-        notebook.save_notes("usernotes.json")
+        notebook.save_notes2("usernotes.json")
         print("Note edited successfully.")
     else:
         print("Invalid note index.")
@@ -131,7 +144,7 @@ def delete_note():
     if 0 <= index < len(notebook.notes):
         notebook.delete_note(index)
         notebook.save_notes("usernotes.pkl")
-        notebook.save_notes("usernotes.json")
+        notebook.save_notes2("usernotes.json")
         print("Note deleted successfully.")
     else:
         print("Invalid note index.")
@@ -172,16 +185,16 @@ def save_notes():
     notebook.save_notes("usernotes.pkl")
 
 def load_notes2():
-    notebook.load_notes("usernotes.json")
+    notebook.load_notes2("usernotes.json")
 
 def save_notes2():
-    notebook.save_notes("usernotes.json")
+    notebook.save_notes2("usernotes.json")
 
 
 def main():
     global notebook
     notebook = NoteBook()
-    load_notes()
+    notebook.load_notes2("usernotes.json")
 
     while True:
         print('Menu:')

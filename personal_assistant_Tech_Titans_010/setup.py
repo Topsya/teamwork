@@ -1,7 +1,6 @@
-from setuptools import setup, find_packages
-
+from setuptools import setup, find_namespace_packages, find_packages 
 setup(
-    name='personal_assistant_Tech_Titans010',
+    name="personal_assistant_Tech_Titans010",
     version= "0.5.5",
     description= " Proekt rabotae s phon book , notebook, clean papki po formats ",
     url='https://github.com/Topsya/teamwork-Tech_Titans',
@@ -16,6 +15,7 @@ setup(
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-3.png',
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-4.png',
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-5.png'])],
+    # packages=find_namespace_packages(),
     packages=find_packages(),
     include_package_data=True,
     install_requires=['pyowm','pygame'],
