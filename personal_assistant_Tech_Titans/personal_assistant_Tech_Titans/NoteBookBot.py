@@ -61,12 +61,13 @@ class NoteBook:
         return matching_notes
 
     def save_notes(self, filename):
-        with open(filename, "wb", indent=4, ensure_ascii=False) as file:
+        with open(filename, "wb") as file:
             pickle.dump(self.notes, file)
+            print ('save is dane ------')
 
     def load_notes(self, filename):
         try:
-            with open(filename, "rb", encoding='utf-8') as file:
+            with open(filename, "rb") as file:
                 self.notes = pickle.load(file)
         except FileNotFoundError:
             self.notes = []
@@ -80,7 +81,7 @@ def add_note():
         tags = [tag.strip() for tag in tags.split(",")]
     note = Note(name, content, tags)
     notebook.add_note(note)
-    notebook.save_notes("notes.pkl")
+    notebook.save_notes("usernotes.pkl")
     print("Note added successfully.")
     print("Timestamp:", note.timestamp)
 
@@ -101,7 +102,7 @@ def edit_note():
         note.content = content
         note.tags = tags
         notebook.edit_note(index, note)
-        notebook.save_notes("notes.pkl")
+        notebook.save_notes("usernotes.pkl")
         print("Note edited successfully.")
     else:
         print("Invalid note index.")
@@ -112,7 +113,7 @@ def delete_note():
     index = int(input("Enter the index of the note to delete: "))
     if 0 <= index < len(notebook.notes):
         notebook.delete_note(index)
-        notebook.save_notes("notes.pkl")
+        notebook.save_notes("usernotes.pkl")
         print("Note deleted successfully.")
     else:
         print("Invalid note index.")
@@ -147,10 +148,10 @@ def search_notes_by_tag():
 
 
 def load_notes():
-    notebook.load_notes("notes.pkl")
+    notebook.load_notes("usernotes.pkl")
 
 def save_notes():
-    notebook.save_notes("notes.pkl")
+    notebook.save_notes("usernotes.pkl")
 
 
 def main():
@@ -166,6 +167,7 @@ def main():
         print('4. Search notes')
         print('5. Search notes by tag')
         print(' "6" or "good bye", "close", "exit" for close NoteBook')
+        print('7. Save notes')
 
         choice = input('Enter the option number: ')
 
@@ -181,6 +183,7 @@ def main():
             search_notes_by_tag()
         elif choice == '7':
            save_notes()
+           
         elif choice == '6':
             save_notes()
             break
@@ -193,3 +196,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# users_NoteBook
