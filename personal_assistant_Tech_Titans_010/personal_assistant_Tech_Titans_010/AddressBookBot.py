@@ -141,6 +141,18 @@ class AddressBook:
         except FileNotFoundError:
                 self.contacts = []
 
+    def save_contacts2(self, filename):
+        with open(filename, "w") as file:
+            json.dump([contact.to_dict() for contact in self.contacts], file)
+
+    def load_contacts2(self, filename):
+        try:
+            with open(filename, "r") as file:
+                contacts_data = json.load(file)
+                self.contacts = [Contact(**data) for data in contacts_data]
+        except FileNotFoundError:
+            self.contacts = []            
+
 
 def handle_add():
     name = input("Enter the name: ")
@@ -150,6 +162,7 @@ def handle_add():
     birthday = input("Enter the birthday (YYYY-MM-DD): ")
     AddressBook.handle_add(name, address, phone, email, birthday)
     AddressBook.save_contacts("usersbook.pkl")
+    AddressBook.save_contacts2("usersbook.json")
     print("Contact added successfully.")
 
 def handle_change():
@@ -160,6 +173,7 @@ def handle_change():
     birthday = input("Enter the new birthday (YYYY-MM-DD): ")
     AddressBook.handle_change(name, address, phone, email, birthday)
     AddressBook.save_contacts("usersbook.pkl")
+    AddressBook.save_contacts2("usersbook.json")
 
     print("Contact change successfully.") 
 
@@ -173,6 +187,7 @@ def handle_delete():
     if Contact.name == name:
         AddressBook.handle_delete(name)
         AddressBook.save_contacts("usersbook.pkl")
+        AddressBook.save_contacts2("usersbook.json")
         print("Contact delete successfully.") 
     else:
          print("Invalid note Name.")
@@ -188,6 +203,15 @@ def save_contacts():
 def load_contacts():
     AddressBook.load_contacts("usersbook.pkl")
 
+def save_contacts2():
+    AddressBook.save_contacts2("usersbook.json")
+    print("Contacts saved successfully.")
+
+
+def load_contacts2():
+    AddressBook.load_contacts2("usersbook.json")
+    print("Contacts loaded successfully.")
+
 
 
 def main():
@@ -197,17 +221,19 @@ def main():
         load_contacts()
             
         while True:
-            print('Menu AddressBook:')
+            print('-------Menu AddressBook:----')
             print('1. Contact add')
             print('2. change a Contact')
             print('3. Delete a Contact')
             print('4. Search Contact')
             print('5.  birthdays in the coming days')
             print('6. or "good bye", "close", "exit" for close Contact')
-            print('7. Save Contact')
-            print('8. Loaded Contact')
+            print('7. Save Contact pkl')
+            print('8. Loaded Contact pkl')
+            print('9. Save Contact  json format')
+            print('10. Loaded Contact  json format')
 
-            command = input("Enter a command: ").lower()
+            command = input("----Enter a command: ").lower()
             if command == "hello":
                 print ('I see You!!! Poot command)))))) ')
                
@@ -229,13 +255,21 @@ def main():
             elif command == "8":
                 load_contacts()
                 print ("Contacts loaded successfully.")
+            
+            elif command == "9":
+                save_contacts2()
+                print("Contacts saved in json format.")
+            elif command == "10":
+                load_contacts2()
+                print ("Contacts loaded from json format.")
 
             elif command == "5":
                get_upcoming_birthdays()
             
-            elif command in ["good bye", "close", "exit"]:
+            elif command in ["good bye", "close", "exit","6"]:
                 save_contacts()
-                print("Good bye!")
+                save_contacts2()
+                print("-----Good bye!-----")
                 break
             else:
                print ("Invalid command.")

@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 setup(
-    name="personal_assistant_Tech_Titans",
-    version= "0.1",
+    name="personal_assistant_Tech_Titans010",
+    version= "0.5",
     description= " Proekt rabotae s phon book , notebook, clean papki po formats ",
     url='https://github.com/Topsya/teamwork-Tech_Titans',
     author= "Anton Mescheryakov, Denis Mashtak, Elizaveta Kolesnyk, Oleg Dovhyi",
