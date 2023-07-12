@@ -1,5 +1,6 @@
 from datetime import datetime
 import pickle
+import json
 
 
 class Note:
@@ -71,6 +72,20 @@ class NoteBook:
                 self.notes = pickle.load(file)
         except FileNotFoundError:
             self.notes = []
+    
+    def save_notes2(self, filename):
+        notes_data = [note.to_dict() for note in self.notes]
+        with open(filename, "w") as file:
+            json.dump(notes_data, file)
+        print('Notes saved successfully on json format.')
+
+    def load_notes2(self, filename):
+        try:
+            with open(filename, "r") as file:
+                notes_data = json.load(file)
+                self.notes = [Note(**data) for data in notes_data]
+        except FileNotFoundError:
+            self.notes = []
 
 
 def add_note():
@@ -82,6 +97,7 @@ def add_note():
     note = Note(name, content, tags)
     notebook.add_note(note)
     notebook.save_notes("usernotes.pkl")
+    notebook.save_notes("usernotes.json")
     print("Note added successfully.")
     print("Timestamp:", note.timestamp)
 
@@ -103,6 +119,7 @@ def edit_note():
         note.tags = tags
         notebook.edit_note(index, note)
         notebook.save_notes("usernotes.pkl")
+        notebook.save_notes("usernotes.json")
         print("Note edited successfully.")
     else:
         print("Invalid note index.")
@@ -114,6 +131,7 @@ def delete_note():
     if 0 <= index < len(notebook.notes):
         notebook.delete_note(index)
         notebook.save_notes("usernotes.pkl")
+        notebook.save_notes("usernotes.json")
         print("Note deleted successfully.")
     else:
         print("Invalid note index.")
@@ -153,6 +171,12 @@ def load_notes():
 def save_notes():
     notebook.save_notes("usernotes.pkl")
 
+def load_notes2():
+    notebook.load_notes("usernotes.json")
+
+def save_notes2():
+    notebook.save_notes("usernotes.json")
+
 
 def main():
     global notebook
@@ -161,14 +185,18 @@ def main():
 
     while True:
         print('Menu:')
-        print('1. Add a note')
-        print('2. Edit a note')
-        print('3. Delete a note')
-        print('4. Search notes')
-        print('5. Search notes by tag')
-        print(' "6" or "good bye", "close", "exit" for close NoteBook')
-        print('7. Save notes')
+        print('1. Add a Note')
+        print('2. Edit a Note')
+        print('3. Delete a Note')
+        print('4. Search Notes')
+        print('5. Search Notes by tag')
+        print('6. or "good bye", "close", "exit" for close NoteBook')
+        print('7. Save Notes pkl')
+        print('8. Loaded Notes pkl')
+        print('9. Save Notes json format')
+        print('10. Loaded Notes json format')
 
+           
         choice = input('Enter the option number: ')
 
         if choice == '1':
@@ -183,6 +211,12 @@ def main():
             search_notes_by_tag()
         elif choice == '7':
            save_notes()
+        elif choice == '8':
+           load_notes()
+        elif choice == '9':
+           save_notes2()
+        elif choice == '10':
+           load_notes2()
            
         elif choice == '6':
             save_notes()

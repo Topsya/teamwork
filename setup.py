@@ -17,7 +17,7 @@ setup(
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-5.png'])],
     packages= find_namespace_packages(),
     include_package_data=True,
-    install_requires=['pyowm'],
+    install_requires=['pyowm','pygame'],
     entry_points={
           'console_scripts': ['assistant=personal_assistant_Tech_Titans.Menu_project:menu']
           }
