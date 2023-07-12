@@ -63,6 +63,7 @@ class NoteBook:
     def save_notes(self, filename):
         with open(filename, "wb") as file:
             pickle.dump(self.notes, file)
+            print ('save is dane ------')
 
     def load_notes(self, filename):
         try:
@@ -80,7 +81,7 @@ def add_note():
         tags = [tag.strip() for tag in tags.split(",")]
     note = Note(name, content, tags)
     notebook.add_note(note)
-    notebook.save_notes("notes.pkl")
+    notebook.save_notes("usernotes.pkl")
     print("Note added successfully.")
     print("Timestamp:", note.timestamp)
 
@@ -101,7 +102,7 @@ def edit_note():
         note.content = content
         note.tags = tags
         notebook.edit_note(index, note)
-        notebook.save_notes("notes.pkl")
+        notebook.save_notes("usernotes.pkl")
         print("Note edited successfully.")
     else:
         print("Invalid note index.")
@@ -112,7 +113,7 @@ def delete_note():
     index = int(input("Enter the index of the note to delete: "))
     if 0 <= index < len(notebook.notes):
         notebook.delete_note(index)
-        notebook.save_notes("notes.pkl")
+        notebook.save_notes("usernotes.pkl")
         print("Note deleted successfully.")
     else:
         print("Invalid note index.")
@@ -147,10 +148,10 @@ def search_notes_by_tag():
 
 
 def load_notes():
-    notebook.load_notes("notes.pkl")
+    notebook.load_notes("usernotes.pkl")
 
 def save_notes():
-    notebook.save_notes("notes.pkl")
+    notebook.save_notes("usernotes.pkl")
 
 
 def main():
@@ -182,6 +183,7 @@ def main():
             search_notes_by_tag()
         elif choice == '7':
            save_notes()
+           
         elif choice == '6':
             save_notes()
             break
@@ -194,3 +196,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# users_NoteBook

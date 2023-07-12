@@ -7,7 +7,7 @@ from os import listdir
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 from datetime import datetime, timedelta
-from AddressBookBot import Contact
+from AddressBookBot import AddressBook
 import AddressBookBot
 import pickle
 from pyowm import OWM
@@ -48,7 +48,7 @@ def menu ():
        
        if vodim == '1':
             print ('start work in AddressBook: ')
-            AddressBookBot.AddressBook.main(Contact)
+            AddressBookBot.main()
               
         
 
