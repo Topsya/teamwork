@@ -15,5 +15,3 @@ personal_assistant_Tech_Titans_010/NoteBookBot.py
 personal_assistant_Tech_Titans_010/__init__.py
 personal_assistant_Tech_Titans_010/pogoda.py
 personal_assistant_Tech_Titans_010/task_11.py
-personal_assistant_Tech_Titans_010/mygame/__init__.py
-personal_assistant_Tech_Titans_010/mygame/main.py

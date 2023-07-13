@@ -1,0 +1,16 @@
+README.md
+setup.py
+Tech_Titans1_4/AddressBook.py
+Tech_Titans1_4/AddressBookBot.py
+Tech_Titans1_4/Menu_project.py
+Tech_Titans1_4/NoteBook.py
+Tech_Titans1_4/NoteBookBot.py
+Tech_Titans1_4/__init__.py
+Tech_Titans1_4/pogoda.py
+Tech_Titans1_4/task_11.py
+personal_assistant_Tech_Titans1_4.egg-info/PKG-INFO
+personal_assistant_Tech_Titans1_4.egg-info/SOURCES.txt
+personal_assistant_Tech_Titans1_4.egg-info/dependency_links.txt
+personal_assistant_Tech_Titans1_4.egg-info/entry_points.txt
+personal_assistant_Tech_Titans1_4.egg-info/requires.txt
+personal_assistant_Tech_Titans1_4.egg-info/top_level.txt
