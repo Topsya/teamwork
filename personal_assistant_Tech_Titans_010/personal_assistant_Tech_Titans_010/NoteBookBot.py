@@ -89,7 +89,7 @@ class NoteBook:
     def save_notes2(self, filename):
         notes_data = [note.to_dict() for note in self.notes]
         with open(filename, "w") as file:
-            json.dump(notes_data, file)
+            json.dump(notes_data, file, indent=4, ensure_ascii=False)
         print('Notes saved successfully on json format.')
 
     def load_notes2(self, filename):
