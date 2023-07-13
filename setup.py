@@ -15,8 +15,8 @@ setup(
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-3.png',
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-4.png',
                                                            'personal_assistant_Tech_Titans/mygame/goose/1-5.png'])],
-    # packages=find_namespace_packages(),
-    packages=find_packages(),
+    packages=find_namespace_packages(),
+    # packages=find_packages(),
     include_package_data=True,
     install_requires=['pyowm','pygame'],
     entry_points={

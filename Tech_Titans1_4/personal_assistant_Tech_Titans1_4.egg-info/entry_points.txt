@@ -1,2 +1,0 @@
-[console_scripts]
-assistant = Tech_Titans1_4.Menu_project:menu

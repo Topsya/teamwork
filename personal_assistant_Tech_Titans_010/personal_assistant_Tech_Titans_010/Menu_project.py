@@ -38,11 +38,11 @@ def menu ():
        elif vodim == '4':
             pogoda_in_city()
 
-       elif vodim == '5':
-              print('the game will start in 3 seconds')
-              time.sleep(3)
-              import mygame.main
-              mygame.main
+    #    elif vodim == '5':
+    #           print('the game will start in 3 seconds')
+    #           time.sleep(3)
+    #           import mygame.main
+    #           mygame.main
 
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
