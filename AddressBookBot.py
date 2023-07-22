@@ -2,6 +2,63 @@ import json
 from datetime import datetime, timedelta
 import pickle
 
+# class Phone:
+#     def __init__(self,phone):
+#         self.phone = phone
+    
+#     @property
+#     def phone(self):
+#             return self.phone
+
+#     @phone.setter
+#     def phone(self, phone):
+#         if not isinstance(phone, str):
+#             raise ValueError("Phone number must be a string")
+#         if not phone.isdigit():
+#             raise ValueError("Phone number must contain only digits")
+#         if len(phone) != 10:
+#             raise ValueError("Phone number must be 10 digits long")
+#         self.phone = phone
+
+# class Birthday  :
+#     def __init__(self, birthday):
+#         self.birthday = birthday
+#     @property
+#     def birthday(self):
+#             return self.birthday
+        
+#     @birthday.setter
+#     def birthday(self, birthday):
+#             if datetime.strptime(birthday, '%m/%d/%Y'):
+#                 self.birthday = birthday
+#             else:
+#                 print ("Birthday format data mm/dd/yyyy : ")
+
+# class email :
+#     def __init__(self,email) :
+#         self.email = email
+
+#     @property
+#     def email(self):
+#         return self.__email
+
+#     @email.setter
+#     def email(self, email):
+#         exceptions = [";", ',', "[", "]", "*",
+#                       "(", ")", ">", "<", ":"]
+#         for i in exceptions:
+#             if email.find(i) != -1:
+#                 raise ValueError("Mail contains prohibited characters")
+
+#         if "@" not in email and "." not in email:
+#             raise ValueError("Email must contain the @ symbol")
+#         if email[0] == "@" or email[-1] == "@":
+#             raise ValueError(
+#                 "The @ symbol cannot be the first or last character")
+#         if email.count('@') > 1:
+#             raise ValueError("The @ symbol must be only one ")
+#         self.__email = email
+
 class Contact:
     def __init__(self, name, address, phone, email, birthday):
         self.name = name
