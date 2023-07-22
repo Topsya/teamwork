@@ -207,7 +207,7 @@ def handle_delete():
 
 
 def get_upcoming_birthdays(days):
-    days = int(input("Enter the number of days to check: "))
+    # days = int(input("Enter the number of days to check: "))
     results = AddressBook.get_upcoming_birthdays(days)
     for contact in results:
         print(contact.to_dict())
@@ -279,7 +279,8 @@ def main():
                 print ("Contacts loaded from json format.")
 
             elif command == "5":
-               get_upcoming_birthdays()
+               days = int(input("Enter the number of days to check: "))
+               get_upcoming_birthdays(days)
             
             elif command in ["good bye", "close", "exit","6"]:
                 save_contacts()
