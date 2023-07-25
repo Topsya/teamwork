@@ -93,40 +93,40 @@ class Contact:
             "birthday": self.birthday
         }    
 
-    @property
-    def phone(self):
-        return self.__phone
+    # @property
+    # def phone(self):
+    #     return self.__phone
 
-    @phone.setter
-    def phone(self, phone):
-        if not isinstance(phone, str):
-            raise ValueError("Phone number must be a string")
-        if not phone.isdigit():
-            raise ValueError("Phone number must contain only digits")
-        if len(phone) != 10:
-            raise ValueError("Phone number must be 10 digits long")
-        self.__phone = phone
+    # @phone.setter
+    # def phone(self, phone):
+    #     if not isinstance(phone, str):
+    #         raise ValueError("Phone number must be a string")
+    #     if not phone.isdigit():
+    #         raise ValueError("Phone number must contain only digits")
+    #     if len(phone) != 10:
+    #         raise ValueError("Phone number must be 10 digits long")
+    #     self.__phone = phone
 
-    @property
-    def email(self):
-        return self.__email
+    # @property
+    # def email(self):
+    #     return self.__email
 
-    @email.setter
-    def email(self, email):
-        exceptions = [";", ',', "[", "]", "*",
-                      "(", ")", ">", "<", ":"]
-        for i in exceptions:
-            if email.find(i) != -1:
-                raise ValueError("Mail contains prohibited characters")
+    # @email.setter
+    # def email(self, email):
+    #     exceptions = [";", ',', "[", "]", "*",
+    #                   "(", ")", ">", "<", ":"]
+    #     for i in exceptions:
+    #         if email.find(i) != -1:
+    #             raise ValueError("Mail contains prohibited characters")
 
-        if "@" not in email and "." not in email:
-            raise ValueError("Email must contain the @ symbol")
-        if email[0] == "@" or email[-1] == "@":
-            raise ValueError(
-                "The @ symbol cannot be the first or last character")
-        if email.count('@') > 1:
-            raise ValueError("The @ symbol must be only one ")
-        self.__email = email
+    #     if "@" not in email and "." not in email:
+    #         raise ValueError("Email must contain the @ symbol")
+    #     if email[0] == "@" or email[-1] == "@":
+    #         raise ValueError(
+    #             "The @ symbol cannot be the first or last character")
+    #     if email.count('@') > 1:
+    #         raise ValueError("The @ symbol must be only one ")
+    #     self.__email = email
 
     
 class AddressBook:
