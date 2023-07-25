@@ -1,63 +1,80 @@
 import json
 from datetime import datetime, timedelta
 import pickle
+import re
 
-# class Phone:
-#     def __init__(self,phone):
-#         self.phone = phone
+
+class Field:
+    def __init__(self, value):
+        self.value = value
+
+class Name(Field):
+    pass
     
-#     @property
-#     def phone(self):
-#             return self.phone
+class Phone(Field):
+    def __init__(self,phone= ""):
+         while True:
+            self.phone = []
+            if phone:
+                self.phones = phone
+            else:
+                self.phones = input("Phones(+ kod stran and 10digits) : ")
+            try:
+                for number in self.phones.split(' '):
+                    if re.match('^\\+38\d{10}$', number) or number == '':
+                        self.value.append(number)
+                    else:
+                        raise ValueError
+            except ValueError:
+                print('Phone number must be "+" 12 digits long.')
+            else:
+                 break
 
-#     @phone.setter
-#     def phone(self, phone):
-#         if not isinstance(phone, str):
-#             raise ValueError("Phone number must be a string")
-#         if not phone.isdigit():
-#             raise ValueError("Phone number must contain only digits")
-#         if len(phone) != 10:
-#             raise ValueError("Phone number must be 10 digits long")
-#         self.phone = phone
+    def __getitem__(self):
+                return self.phone
 
-# class Birthday  :
-#     def __init__(self, birthday):
-#         self.birthday = birthday
-#     @property
-#     def birthday(self):
-#             return self.birthday
-        
-#     @birthday.setter
-#     def birthday(self, birthday):
-#             if datetime.strptime(birthday, '%m/%d/%Y'):
-#                 self.birthday = birthday
-#             else:
-#                 print ("Birthday format data mm/dd/yyyy : ")
 
-# class email :
-#     def __init__(self,email) :
-#         self.email = email
+class Birthday(Field)   :
+    def __init__(self, birthday=''):
+      while True:
+         if birthday:
+            self.birthday = birthday
+         else:
+            self.value = input("Birthday format date mm/dd/yyyy: ")
+         try:
+            if re.match('^\d{2}/\d{2}/\d{4}$', self.birthday):
+                    self.value = datetime.strptime(self.birthday.strip(), "%d/%m/%Y")
+                    break
+            elif self.value == '':
+                    break
+            else:
+               raise ValueError
 
-#     @property
-#     def email(self):
-#         return self.__email
+         except ValueError:
+                print('Enter correct date format.')
 
-#     @email.setter
-#     def email(self, email):
-#         exceptions = [";", ',', "[", "]", "*",
-#                       "(", ")", ">", "<", ":"]
-#         for i in exceptions:
-#             if email.find(i) != -1:
-#                 raise ValueError("Mail contains prohibited characters")
+    def __getitem__(self):
+        return self.birthday
 
-#         if "@" not in email and "." not in email:
-#             raise ValueError("Email must contain the @ symbol")
-#         if email[0] == "@" or email[-1] == "@":
-#             raise ValueError(
-#                 "The @ symbol cannot be the first or last character")
-#         if email.count('@') > 1:
-#             raise ValueError("The @ symbol must be only one ")
-#         self.__email = email
+class email :
+    def __init__(self,email='') :
+        while True:
+           if email:
+                 self.email = email
+           else:
+                self.email = input("Email: ")
+      
+           try:
+                if re.match('^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$', self.email) or self.email == '':
+                    break
+                else:
+                    raise ValueError
+           except ValueError:
+                print('this is no email! Enter correct email.')
+
+    def __getitem__(self):
+        return self.email    
+
 
 class Contact:
     def __init__(self, name, address, phone, email, birthday):
@@ -198,11 +215,11 @@ class AddressBook:
 
     def save_contacts(self, filename):
         with open(filename, "wb+") as file:
-            pickle.dump(self.contacts, file)
+            pickle.dump(self.contacts, file, indent=5, ensurse_ascii=False)
 
     def load_contacts(self, filename):
         try:
-           with open(filename, 'rb') as file:
+           with open(filename, 'rb',encoding='utf-8') as file:
              self.contacts = pickle.load(file)
         except FileNotFoundError:
                 self.contacts = []
@@ -213,7 +230,8 @@ class AddressBook:
 
     def load_contacts2(self, filename):
         try:
-            with open(filename, "r" ) as file:
+            # with open('users_fail.json', 'r', encoding='utf-8') as readfail:
+            with open(filename, "r", encoding='utf-8' ) as file:
                 contacts_data = json.load(file)
                 self.contacts = [Contact(**data) for data in contacts_data]
         except FileNotFoundError:
@@ -304,6 +322,7 @@ def main():
             print('8. Loaded Contact pkl')
             print('9. Save Contact  json format')
             print('10. Loaded Contact  json format')
+            print('11. print Contact')
 
             command = input("----Enter a command: ").lower()
             if command == "hello":
@@ -334,6 +353,10 @@ def main():
             elif command == "10":
                 load_contacts2()
                 print ("Contacts loaded from json format.")
+
+            elif command == "11":
+
+                print (f'{AddressBook.contacts }')
 
             elif command == "5":
                days = int(input("Enter the number of days to check: "))
