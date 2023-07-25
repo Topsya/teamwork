@@ -1,11 +1,20 @@
 [
      {
-          "name": "Anton",
-          "address": "prosto",
+          "name": "anton",
+          "address": "dnepr",
           "phone": [
                "+380506365539"
           ],
-          "email": "aaa@dddd.vc",
-          "birthday": "2111-11-11"
+          "email": "topsya@gmail.com",
+          "birthday": "1986-01-08"
+     },
+     {
+          "name": "vasil",
+          "address": "pavlik",
+          "phone": [
+               "+380985554444"
+          ],
+          "email": "asassa@sdsdds.dd",
+          "birthday": "1970-08-29"
      }
 ]

@@ -198,9 +198,9 @@ class AddressBook:
                 self.contacts = []
 
     def save_contacts2(self, filename):
-        # contacts_data = [self.to_dict() for self in self.contacts]
+        contacts_data = [note.to_dict() for note in self.contacts]
         with open(filename, "w") as file:
-            json.dump( self.contacts , file, indent=5, ensure_ascii=False)
+            json.dump( contacts_data, file, indent=5, ensure_ascii=False)
 
     def load_contacts2(self, filename):
         try:
@@ -331,7 +331,7 @@ def main():
                 print ("Contacts loaded from json format.")
 
             elif command == "11":
-
+            
                 print (f'{AddressBook.contacts}')
 
             elif command == "5":
