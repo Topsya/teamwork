@@ -24,6 +24,7 @@ class Note:
         if tag in self.tags:
             self.tags.remove(tag)
 
+# поиск по тегу
     def search_by_tag(self, tag):
         matching_notes = []
         if tag in self.tags:

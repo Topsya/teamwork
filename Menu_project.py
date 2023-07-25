@@ -44,6 +44,7 @@ def menu ():
               import mygame.main
               mygame.main
 
+
        elif  vodim.lower()  == 'close' or vodim.lower()  == 'exit':
             print("Good bye!")
             break

@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 import pickle
 import re
-
+from collections import UserList
 
 class Field:
     def __init__(self, value):
@@ -18,11 +18,11 @@ class Phone(Field):
             if phone:
                 self.phones = phone
             else:
-                self.phones = input("Phones(+ kod stran and 10digits) : ")
+                self.phones = input("Enter Phones(+ kod stran and 10digits) : ")
             try:
                 for number in self.phones.split(' '):
                     if re.match('^\\+38\d{10}$', number) or number == '':
-                        self.value.append(number)
+                        self.phone.append(number)
                     else:
                         raise ValueError
             except ValueError:
@@ -30,8 +30,8 @@ class Phone(Field):
             else:
                  break
 
-    def __getitem__(self):
-                return self.phone
+    # def __getitem__(self):
+    #             return self.phone
 
 
 class Birthday(Field)   :
@@ -40,12 +40,12 @@ class Birthday(Field)   :
          if birthday:
             self.birthday = birthday
          else:
-            self.value = input("Birthday format date mm/dd/yyyy: ")
+            self.birthday = input("Enter Birthday format date mm/dd/yyyy: ")
          try:
             if re.match('^\d{2}/\d{2}/\d{4}$', self.birthday):
-                    self.value = datetime.strptime(self.birthday.strip(), "%d/%m/%Y")
-                    break
-            elif self.value == '':
+                  self.birthday = datetime.strptime(self.birthday.strip(), "%d/%m/%Y").date()
+                  break
+            elif self.birthday == '':
                     break
             else:
                raise ValueError
@@ -53,16 +53,16 @@ class Birthday(Field)   :
          except ValueError:
                 print('Enter correct date format.')
 
-    def __getitem__(self):
-        return self.birthday
+    # def __getitem__(self):
+    #     return self.birthday
 
-class email :
+class Email :
     def __init__(self,email='') :
         while True:
            if email:
                  self.email = email
            else:
-                self.email = input("Email: ")
+                self.email = input("Enter Email: ")
       
            try:
                 if re.match('^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$', self.email) or self.email == '':
@@ -72,17 +72,17 @@ class email :
            except ValueError:
                 print('this is no email! Enter correct email.')
 
-    def __getitem__(self):
-        return self.email    
+    # def __getitem__(self):
+    #     return self.email    
 
 
 class Contact:
-    def __init__(self, name, address, phone, email, birthday):
-        self.name = name
+    def __init__(self, Name, address, Phone , Email , Birthday ):
+        self.name = Name
         self.address = address
-        self.__phone = phone
-        self.__email = email
-        self.birthday = birthday
+        self.phone = Phone
+        self.email = Email
+        self.birthday = Birthday
 
     def to_dict(self):
         return {
@@ -92,41 +92,6 @@ class Contact:
             "email": self.email,
             "birthday": self.birthday
         }    
-
-    # @property
-    # def phone(self):
-    #     return self.__phone
-
-    # @phone.setter
-    # def phone(self, phone):
-    #     if not isinstance(phone, str):
-    #         raise ValueError("Phone number must be a string")
-    #     if not phone.isdigit():
-    #         raise ValueError("Phone number must contain only digits")
-    #     if len(phone) != 10:
-    #         raise ValueError("Phone number must be 10 digits long")
-    #     self.__phone = phone
-
-    # @property
-    # def email(self):
-    #     return self.__email
-
-    # @email.setter
-    # def email(self, email):
-    #     exceptions = [";", ',', "[", "]", "*",
-    #                   "(", ")", ">", "<", ":"]
-    #     for i in exceptions:
-    #         if email.find(i) != -1:
-    #             raise ValueError("Mail contains prohibited characters")
-
-    #     if "@" not in email and "." not in email:
-    #         raise ValueError("Email must contain the @ symbol")
-    #     if email[0] == "@" or email[-1] == "@":
-    #         raise ValueError(
-    #             "The @ symbol cannot be the first or last character")
-    #     if email.count('@') > 1:
-    #         raise ValueError("The @ symbol must be only one ")
-    #     self.__email = email
 
     
 class AddressBook:
@@ -175,6 +140,14 @@ class AddressBook:
     def handle_hello():
         return "How can I help you?"
 
+    # def handle_add( self, contact):
+
+    #     account = {'name':  contact.name,
+    #                'address':  contact.address,
+    #                'phones':  contact.phone,
+    #                'email':  contact.email,
+    #                'birthday':  contact.birthday}       
+    #     self.contacts.append(account)
     def handle_add(self, name, address, phone, email, birthday):
         try:
             contact = Contact(name, address, phone, email, birthday)
@@ -182,7 +155,7 @@ class AddressBook:
             return "Contact added successfully."
         except ValueError as e:
             return str(e)
-
+        
     def handle_change(self, name, address, phone, email, birthday):
         for contact in self.contacts:
             if contact.name == name:
@@ -215,36 +188,39 @@ class AddressBook:
 
     def save_contacts(self, filename):
         with open(filename, "wb+") as file:
-            pickle.dump(self.contacts, file, indent=5, ensurse_ascii=False)
+            pickle.dump(self.contacts, file )
 
     def load_contacts(self, filename):
         try:
-           with open(filename, 'rb',encoding='utf-8') as file:
+           with open(filename, 'rb') as file:
              self.contacts = pickle.load(file)
         except FileNotFoundError:
                 self.contacts = []
 
     def save_contacts2(self, filename):
+        # contacts_data = [self.to_dict() for self in self.contacts]
         with open(filename, "w") as file:
-            json.dump([contact.to_dict() for contact in self.contacts], file, indent=5, ensure_ascii=False)
+            json.dump( self.contacts , file, indent=5, ensure_ascii=False)
 
     def load_contacts2(self, filename):
         try:
-            # with open('users_fail.json', 'r', encoding='utf-8') as readfail:
             with open(filename, "r", encoding='utf-8' ) as file:
                 contacts_data = json.load(file)
-                self.contacts = [Contact(**data) for data in contacts_data]
+                self.contacts =  contacts_data
         except FileNotFoundError:
             self.contacts = []            
 
 
+ 
 def handle_add():
     name = input("Enter the name: ")
     address = input("Enter the address: ")
-    phone = input("Enter the phone number: ")
-    email = input("Enter the email: ")
-    birthday = input("Enter the birthday (YYYY-MM-DD): ")
+    phone = Phone().phone
+    email = Email().email
+    birthday = str(Birthday().birthday)
     AddressBook.handle_add(name, address, phone, email, birthday)
+    # contact = Contact(name, address, phone , email , birthday)
+    # AddressBook.handle_add(contact)
     AddressBook.save_contacts("usersbook.pkl")
     AddressBook.save_contacts2("usersbook.json")
     print("Contact added successfully.")
@@ -356,7 +332,7 @@ def main():
 
             elif command == "11":
 
-                print (f'{AddressBook.contacts }')
+                print (f'{AddressBook.contacts}')
 
             elif command == "5":
                days = int(input("Enter the number of days to check: "))
