@@ -3,13 +3,23 @@ from datetime import datetime, timedelta
 import pickle
 import re
 from collections import UserList
+from abc import ABC, abstractmethod
 
-class Field:
+
+class Field(ABC):
+    def __init__(self, value):
+        self.value = value
+    
+    @abstractmethod
+    def generate(self):
+        pass
+
+class Name(Field):
     def __init__(self, value):
         self.value = value
 
-class Name(Field):
-    pass
+    def generate(self):
+        pass
     
 class Phone(Field):
     def __init__(self,phone= ""):
@@ -30,8 +40,8 @@ class Phone(Field):
             else:
                  break
 
-    # def __getitem__(self):
-    #             return self.phone
+    def generate(self):
+       return self.phone 
 
 
 class Birthday(Field)   :
@@ -53,8 +63,8 @@ class Birthday(Field)   :
          except ValueError:
                 print('Enter correct date format.')
 
-    # def __getitem__(self):
-    #     return self.birthday
+    def generate(self):
+       return self.birthday
 
 class Email :
     def __init__(self,email='') :
@@ -72,8 +82,8 @@ class Email :
            except ValueError:
                 print('this is no email! Enter correct email.')
 
-    # def __getitem__(self):
-    #     return self.email    
+    def generate(self):
+       return self.email
 
 
 class Contact:

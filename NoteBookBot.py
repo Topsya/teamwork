@@ -1,9 +1,17 @@
 from datetime import datetime
 import pickle
 import json
+from abc import ABC, abstractmethod
 
+class Field(ABC):
+    def __init__(self, value):
+        self.value = value
+    
+    @abstractmethod
+    def generate(self):
+        pass
 
-class Note:
+class Note(ABC):
     def __init__(self, name, content, tags=None, timestamp=None):
         self.name = name
         self.content = content
@@ -38,6 +46,9 @@ class Note:
             "tags": self.tags,
             "timestamp": self.timestamp
         }
+    
+    def generate(self):
+        return self.to_dict
 
 
 
@@ -209,6 +220,7 @@ def main():
         print('8. Loaded Notes pkl')
         print('9. Save Notes json format')
         print('10. Loaded Notes json format')
+        print('11. print all Notes ')
 
            
         choice = input('Enter the option number: ')
@@ -231,6 +243,8 @@ def main():
            save_notes2()
         elif choice == '10':
            load_notes2()
+        elif choice == '11':
+           print(f'{notebook}')
            
         elif choice == '6':
             save_notes()
